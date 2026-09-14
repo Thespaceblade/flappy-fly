@@ -1,0 +1,42 @@
+# Python
+.venv/
+.venv-*/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+build/
+
+# Connectome / large data
+connectome_data/
+*.npz
+*.h5
+*.npz.gz
+*.parquet
+*.feather
+
+# Game / training artifacts
+outputs/
+checkpoints/
+*.ckpt
+*.pt
+*.onnx
+logs/
+
+# Env / secrets
+.env
+.env.*
+.dev.vars
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Node (if a viewer is added later)
+node_modules/
+npm-debug.log*
