@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flappy Fly — watch the circuit</title>
+  <style>
+    :root {
+      --bg: #070b14;
+      --panel: #0e1524;
+      --ink: #e8eef8;
+      --muted: #8b9bb4;
+      --accent: #f0c14a;
+      --line: #243049;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); }
+    body {
+      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 12px 28px;
+      background:
+        radial-gradient(1200px 600px at 20% -10%, #1a2744 0%, transparent 55%),
+        radial-gradient(900px 500px at 90% 10%, #2a1a12 0%, transparent 50%),
+        var(--bg);
+    }
+    h1 {
+      font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+      font-weight: 600;
+      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+      letter-spacing: 0.04em;
+      margin: 0 0 4px;
+    }
+    .sub { color: var(--muted); font-size: 0.9rem; margin: 0 0 16px; text-align: center; max-width: 40rem; }
+    .stage {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .frame {
+      position: relative;
+      width: min(100vw - 24px, 360px);
+      aspect-ratio: 288 / 512;
+      background: #000;
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 50px #0008;
+    }
+    #c {
+      width: 100%;
+      height: 100%;
+      image-rendering: pixelated;
+      display: block;
+      cursor: pointer;
+    }
+    .brain-panel {
+      width: min(100vw - 24px, 340px);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    #brainMap {
+      width: 100%;
+      height: 420px;
+      image-rendering: pixelated;
+      background: #0b1020;
+      border: 1px solid var(--line);
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 12px;
+      max-width: 720px;
+    }
+    button, select, label, input {
+      background: #121a2b;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      border-radius: 4px;
+      padding: 6px 10px;
+      font: inherit;
+      font-size: 13px;
+    }
+    button:hover, select:hover { border-color: var(--accent); }
+    button.active { background: #2a2110; border-color: var(--accent); color: var(--accent); }
+    #hud { margin-top: 10px; color: var(--muted); font-size: 13px; text-align: center; }
+    #cellInfo {
+      min-height: 3.2rem;
+      font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.35;
+      white-space: pre-wrap;
+    }
+    .legend-row { display: flex; gap: 12px; font-size: 11px; color: var(--muted); flex-wrap: wrap; }
+    .swatch { display: inline-block; width: 8px; height: 8px; margin-right: 4px; vertical-align: middle; }
+    #featHud {
+      margin-top: 10px;
+      width: min(100%, 920px);
+      font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+      font-size: 11px;
+      color: var(--muted);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+      max-height: 420px;
+      overflow: auto;
+    }
+    #featHud .hi { color: var(--accent); }
+    #featHud .ok { color: #4ade80; }
+    #barRow { display: flex; gap: 2px; flex-wrap: wrap; margin: 4px 0 8px; }
+    #barRow i {
+      display: inline-block;
+      width: 8px;
+      height: 28px;
+      background: #243049;
+      border-radius: 1px;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <h1>FLAPPY FLY</h1>
+  <p class="sub">MaleCNS subgraph driving the flap — green cells get the optical encoder, pink cells feed the readout, brightness = activity.</p>
+
+  <div class="stage">
+    <div class="frame">
+      <canvas id="c" width="288" height="512"></canvas>
+    </div>
+    <div class="brain-panel">
+      <canvas id="brainMap" width="320" height="420"></canvas>
+      <div class="legend-row">
+        <span><i class="swatch" style="background:#4ade80"></i>visual input</span>
+        <span><i class="swatch" style="background:#f472b6"></i>descending</span>
+        <span><i class="swatch" style="background:#c9a227"></i>active +</span>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <canvas id="eyeView" width="64" height="64" style="width:96px;height:96px;image-rendering:pixelated;border:1px solid var(--line);background:#111"></canvas>
+        <div style="font-size:11px;color:var(--muted);line-height:1.35">What the fly “sees”<br/>(4×64×64 stack → CNN)</div>
+      </div>
+      <div id="cellInfo">Hover a cell for identity.</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button type="button" id="modeYou">You</button>
+    <button type="button" id="modeRule">Rule</button>
+    <button type="button" class="active" id="modeBrain">Brain (eye)</button>
+    <button type="button" id="modeFeat">Brain (feat)</button>
+    <button type="button" id="restart">Restart</button>
+    <label>Seed <input id="seed" type="number" value="42" style="width:5rem" /></label>
+    <label><input id="loop" type="checkbox" checked /> Auto-restart</label>
+  </div>
+  <div id="hud">loading circuit…</div>
+  <div id="featHud">
+    <div><span class="hi">live parameters</span></div>
+    <div id="barRow"></div>
+    <pre id="featText">…</pre>
+  </div>
+
+  <script type="module">
+    import { FlyBrain, drawBrainMap } from "./brain.js";
+    import { OpticalEncoder, renderObs } from "./optical.js";
+
+    const W = 288, H = 512;
+    const BIRD_W = 20, BIRD_H = 20;
+    const BIRD_X = 80, BIRD_START_Y = 246;
+    const PIPE_W = 52, PIPE_H = 320, PIPE_GAP = 96;
+    const PIPE_H_MIN = 180, PIPE_H_MAX = 360;
+    const GROUND_Y = 400, SCROLL = 2, PHYS_HZ = 60;
+    const GRAVITY = 0.3, FLAP_V = -5, MAX_FALL = 8;
+    const ASSET = "../vendor/floppybird/assets";
+    const FLY_SRCS = [
+      "assets/fly/0_upflap.png",
+      "assets/fly/1_midflap.png",
+      "assets/fly/2_downflap.png",
+      "assets/fly/1_midflap.png",
+    ];
+
+    const canvas = document.getElementById("c");
+    const ctx = canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = false;
+    const mapCanvas = document.getElementById("brainMap");
+    const eyeCanvas = document.getElementById("eyeView");
+    const eyeCtx = eyeCanvas.getContext("2d");
+    const hud = document.getElementById("hud");
+    const featHud = document.getElementById("featHud");
+    const featText = document.getElementById("featText");
+    const barRow = document.getElementById("barRow");
+    const cellInfo = document.getElementById("cellInfo");
+    const FEAT_NAMES = [
+      "birdY",
+      "birdVy",
+      "gapY",
+      "pipeProx",
+      "gapHalf",
+      "heightErr",
+    ];
+    let lastDecide = null;
+    let lastDecideFlap = false;
+    let lastObs = null;
+
+    const img = {};
+    const flyFrames = [];
+    let brain = null;
+    let featBrain = null;
+    let opticalEnc = null;
+    let mode = "brain"; // you | rule | brain | feat
+    let hoverIdx = -1;
+
+    function load(name, src) {
+      return new Promise((res, rej) => {
+        const i = new Image();
+        i.onload = () => { img[name] = i; res(i); };
+        i.onerror = rej;
+        i.src = src;
+      });
+    }
+    function loadFly(src) {
+      return new Promise((res, rej) => {
+        const i = new Image();
+        i.onload = () => res(i);
+        i.onerror = rej;
+        i.src = src;
+      });
+    }
+
+    function mulberry(seed) {
+      let s = (seed >>> 0) || 1;
+      return {
+        u32() { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s; },
+        range(min, maxEx) {
+          const span = maxEx - min;
+          return (this.u32() % span) + min;
+        }
+      };
+    }
+
+    function pipeSpacing() { return (W - ((PIPE_W * 3) / 2)) / 2; }
+
+    let rng, birdY, birdVy, pipes, frame, score, alive, started, pendingFlap;
+    let lastTs = 0, acc = 0, landOff = 0, restartAt = 0;
+
+    function spawn(x) {
+      pipes.push({
+        x: x | 0,
+        height: rng.range(PIPE_H_MIN, PIPE_H_MAX),
+        scored: false,
+      });
+    }
+
+    function reset(seed) {
+      rng = mulberry(Number(seed) || 42);
+      birdY = BIRD_START_Y;
+      birdVy = 0;
+      pipes = [];
+      frame = 0; score = 0; alive = true; pendingFlap = false;
+      landOff = 0;
+      restartAt = 0;
+      if (brain) brain.reset();
+      if (featBrain) featBrain.reset();
+      if (opticalEnc) opticalEnc.reset();
+      const spacing = pipeSpacing() | 0;
+      const x0 = (spacing - (PIPE_W >> 1) + W) | 0;
+      spawn(x0);
+      spawn(pipes[0].x + spacing + PIPE_W);
+      spawn(pipes[1].x + spacing + PIPE_W);
+      started = mode !== "you";
+      lastDecideFlap = false;
+      lastDecide = null;
+      draw();
+      const mapBrain = mode === "feat" ? featBrain : brain;
+      if (mapBrain) drawBrainMap(mapCanvas, mapBrain, hoverIdx);
+    }
+
+    function aabb(ax, ay, aw, ah, bx, by, bw, bh) {
+      return ax + aw >= bx && ax <= bx + bw && ay + ah >= by && ay <= by + bh;
+    }
+
+    function step(flap) {
+      if (!alive) return;
+      if (flap) birdVy = FLAP_V;
+      birdVy += GRAVITY;
+      if (birdVy > MAX_FALL) birdVy = MAX_FALL;
+      birdY += birdVy;
+      landOff = (landOff - SCROLL);
+      if (landOff <= -24) landOff = 0;
+
+      for (const p of pipes) {
+        const prevX = p.x;
+        p.x = (p.x - SCROLL) | 0;
+        // Crossing detection (C uses x==80||x==79; parity-safe for the viewer).
+        if (!p.scored && prevX > BIRD_X && p.x <= BIRD_X) {
+          p.scored = true;
+          score++;
+        }
+      }
+      pipes = pipes.filter(p => p.x >= -PIPE_W);
+      while (pipes.length < 3) {
+        let maxx = Math.max(...pipes.map(p => p.x));
+        const spacing = pipeSpacing() | 0;
+        spawn((maxx + spacing + PIPE_W) | 0);
+      }
+
+      const by = birdY | 0;
+      if (by >= GROUND_Y - BIRD_H) { alive = false; return; }
+      if (birdY < 0) birdY = 0;
+      for (const p of pipes) {
+        const topY = (p.height - PIPE_H) - PIPE_GAP;
+        const botY = p.height;
+        if (aabb(BIRD_X, by, BIRD_W, BIRD_H, p.x, topY, PIPE_W, PIPE_H) ||
+            aabb(BIRD_X, by, BIRD_W, BIRD_H, p.x, botY, PIPE_W, PIPE_H)) {
+          alive = false; return;
+        }
+      }
+      frame++;
+    }
+
+    function nextPipe() {
+      let best = null, bestX = 1e9;
+      for (const p of pipes) {
+        if (p.x + PIPE_W >= BIRD_X && p.x < bestX) { best = p; bestX = p.x; }
+      }
+      return best;
+    }
+
+    function features() {
+      const birdMid = birdY + BIRD_H * 0.5;
+      const out = new Float32Array(6);
+      out[0] = Math.min(1, Math.max(0, birdMid / GROUND_Y));
+      out[1] = Math.min(1, Math.max(0, (birdVy + 5) / 13));
+      const p = nextPipe();
+      if (!p) {
+        out[2] = 0.5; out[3] = 0; out[4] = PIPE_GAP / GROUND_Y; out[5] = 0.5;
+        return out;
+      }
+      const gapCenter = p.height - PIPE_GAP * 0.5;
+      out[2] = Math.min(1, Math.max(0, gapCenter / GROUND_Y));
+      const dist = p.x - (BIRD_X + BIRD_W);
+      out[3] = Math.min(1, Math.max(0, 1 - dist / W));
+      out[4] = Math.min(1, Math.max(0, (PIPE_GAP * 0.5) / GROUND_Y));
+      const err = birdMid - gapCenter;
+      out[5] = Math.min(1, Math.max(0, 0.5 + err / GROUND_Y));
+      return out;
+    }
+
+    function ruleFlap() {
+      const p = nextPipe();
+      const mid = birdY + BIRD_H / 2;
+      const gap = p ? p.height - PIPE_GAP / 2 : GROUND_Y / 2;
+      const err = mid - gap;
+      return err > 4 || (err > -8 && birdVy > 1);
+    }
+
+    function policyFlap() {
+      if (mode === "you") return pendingFlap;
+      if (mode === "rule") return ruleFlap();
+      if (mode === "feat" && featBrain) {
+        lastDecide = featBrain.decide(features());
+        return !!lastDecide.flap;
+      }
+      if (mode === "brain" && brain && opticalEnc) {
+        const drives = opticalEnc.forwardFromGame({ pipes, birdY, birdVy });
+        lastDecide = brain.decideFromDrives(drives);
+        if (opticalEnc.prevFrame) drawEye(opticalEnc.prevFrame, opticalEnc.H || 64);
+        return !!lastDecide.flap;
+      }
+      return false;
+    }
+
+    function drawEye(obs, side = 64) {
+      if (eyeCanvas.width !== side) {
+        eyeCanvas.width = side;
+        eyeCanvas.height = side;
+      }
+      const id = eyeCtx.createImageData(side, side);
+      for (let i = 0; i < side * side; i++) {
+        const v = Math.max(0, Math.min(255, (obs[i] * 255) | 0));
+        id.data[i * 4] = v;
+        id.data[i * 4 + 1] = v;
+        id.data[i * 4 + 2] = v;
+        id.data[i * 4 + 3] = 255;
+      }
+      eyeCtx.putImageData(id, 0, 0);
+    }
+
+    function renderBars(dnActs) {
+      if (!dnActs) { barRow.innerHTML = ""; return; }
+      let html = "";
+      for (let i = 0; i < dnActs.length; i++) {
+        const v = Math.max(-1, Math.min(1, dnActs[i] / 4));
+        const h = Math.max(2, Math.round(Math.abs(v) * 28));
+        const col = v >= 0 ? `rgb(${40 + v * 200},${40 + v * 160},40)` : `rgb(30,60,${40 - v * 180})`;
+        html += `<i title="DN${i}=${dnActs[i].toFixed(3)}" style="height:${h}px;background:${col}"></i>`;
+      }
+      barRow.innerHTML = html;
+    }
+
+    function updateLiveHud() {
+      const f = features();
+      const p = nextPipe();
+      const birdMid = birdY + BIRD_H * 0.5;
+      const gapCenter = p ? p.height - PIPE_GAP * 0.5 : GROUND_Y * 0.5;
+      const err = birdMid - gapCenter;
+      const active = mode === "feat" ? featBrain : brain;
+      const lines = [];
+      lines.push(`<span class="hi">graph</span>  n=${active ? active.n : "—"}  edges=${active ? active.nEdges : "—"}  dn=${active ? active.nDn : "—"}  visual=${active && active.visualToCell ? active.visualToCell.length : "—"}  readout_params=${active ? active.nParams : "—"}`);
+      if (mode === "brain") {
+        lines.push(`<span class="hi">input</span>  optical 4×64×64 stack → ${opticalEnc ? opticalEnc.nVisual : "?"} inject cells`);
+        if (lastDecide && lastDecide.drives) {
+          const d = lastDecide.drives;
+          const show = [...d].slice(0, 12).map((v, i) => `v${i}=${v.toFixed(2)}`).join(" ");
+          lines.push(`<span class="hi">drives[0..11]</span>  ${show} …`);
+        }
+      } else {
+        lines.push(`<span class="hi">features f[0..5]</span>  ` + FEAT_NAMES.map((n, i) => `${n}=${f[i].toFixed(3)}`).join("  "));
+      }
+      lines.push(`raw birdY=${birdY.toFixed(2)} mid=${birdMid.toFixed(2)} vy=${birdVy.toFixed(3)} gapCenter=${gapCenter.toFixed(2)} err=${err.toFixed(2)} pipeX=${p ? p.x.toFixed(0) : "—"}`);
+      if (lastDecide && (mode === "brain" || mode === "feat")) {
+        const d = lastDecide;
+        lines.push(`<span class="hi">decision</span>  flap=<span class="ok">${d.flap ? "YES" : "no"}</span>  logits=[${d.logits[0].toFixed(3)}, ${d.logits[1].toFixed(3)}]  P(flap)=${d.pFlap.toFixed(3)}`);
+        lines.push(`<span class="hi">DN acts (×4·h)</span>  ` + [...d.dnActs].map((v, i) => `d${i}=${v.toFixed(2)}`).join(" "));
+        lines.push(`<span class="hi">MLP hidden</span>  ` + [...d.hidden].map((v, i) => `h${i}=${v.toFixed(2)}`).join(" "));
+        renderBars(d.dnActs);
+        if (active) {
+          const ps = active.paramSnapshot();
+          const chunks = [];
+          for (let i = 0; i < ps.length; i += 8) {
+            chunks.push(
+              ps.slice(i, i + 8).map((v, j) => `p${String(i + j).padStart(3, "0")}=${v.toFixed(3)}`).join("  ")
+            );
+          }
+          lines.push(`<span class="hi">readout θ (${ps.length})</span>`);
+          lines.push(...chunks);
+        }
+      } else {
+        lines.push(`decide flap=${lastDecideFlap ? "YES" : "no"}`);
+        renderBars(null);
+      }
+      featText.innerHTML = lines.join("\n");
+    }
+
+    function draw() {
+      ctx.imageSmoothingEnabled = false;
+      ctx.fillStyle = "#4ec0ca";
+      ctx.fillRect(0, 0, W, H);
+      if (img.sky) ctx.drawImage(img.sky, 0, GROUND_Y - img.sky.height);
+
+      for (const p of pipes) {
+        const topY = (p.height - PIPE_H) - PIPE_GAP;
+        const botY = p.height;
+        const topBottom = topY + PIPE_H;
+        if (img.pipeBody) {
+          ctx.drawImage(img.pipeBody, p.x, topY, PIPE_W, PIPE_H);
+          ctx.drawImage(img.pipeBody, p.x, botY, PIPE_W, Math.max(0, GROUND_Y - botY));
+        }
+        if (img.pipeDown) ctx.drawImage(img.pipeDown, p.x, topBottom - img.pipeDown.height);
+        if (img.pipeUp) ctx.drawImage(img.pipeUp, p.x, botY);
+      }
+
+      if (img.land) {
+        const ly = H - img.land.height;
+        ctx.drawImage(img.land, landOff, ly);
+        ctx.drawImage(img.land, landOff + img.land.width, ly);
+      }
+
+      const fw = 34, fh = 24;
+      const bx = Math.round(BIRD_X + BIRD_W / 2);
+      const by = Math.round(birdY + BIRD_H / 2);
+      let rot = Math.min(Math.max((birdVy / 10) * 90, -25), 90);
+      if (!alive) rot = 90;
+      ctx.save();
+      ctx.translate(bx, by);
+      ctx.rotate((rot * Math.PI) / 180);
+      if (flyFrames.length === 4) {
+        const pose = alive ? Math.floor(frame / 5) % 4 : 1;
+        ctx.drawImage(flyFrames[pose], Math.round(-fw / 2), Math.round(-fh / 2), fw, fh);
+      } else {
+        ctx.fillStyle = "#c48c48";
+        ctx.fillRect(-BIRD_W / 2, -BIRD_H / 2, BIRD_W, BIRD_H);
+      }
+      ctx.restore();
+
+      ctx.fillStyle = "#fff";
+      ctx.strokeStyle = "#000";
+      ctx.lineWidth = 3;
+      ctx.font = "bold 32px system-ui";
+      ctx.textAlign = "center";
+      ctx.strokeText(String(score), W / 2, 60);
+      ctx.fillText(String(score), W / 2, 60);
+
+      if (!alive) {
+        ctx.fillStyle = "#0008";
+        ctx.fillRect(0, H / 2 - 28, W, 56);
+        ctx.fillStyle = "#fff";
+        ctx.font = "14px system-ui";
+        ctx.fillText(mode === "you" ? "dead — click to restart" : "dead", W / 2, H / 2 + 5);
+      }
+    }
+
+    function setMode(m) {
+      mode = m;
+      document.getElementById("modeYou").classList.toggle("active", m === "you");
+      document.getElementById("modeRule").classList.toggle("active", m === "rule");
+      document.getElementById("modeBrain").classList.toggle("active", m === "brain");
+      document.getElementById("modeFeat").classList.toggle("active", m === "feat");
+      reset(document.getElementById("seed").value);
+    }
+
+    function flapHuman() {
+      if (mode !== "you") return;
+      if (!alive) { reset(document.getElementById("seed").value); started = true; return; }
+      started = true;
+      pendingFlap = true;
+    }
+
+    function tick(ts) {
+      if (!lastTs) lastTs = ts;
+      const dt = Math.min(0.05, (ts - lastTs) / 1000);
+      lastTs = ts;
+      if (started && alive) {
+        acc += dt;
+        const stepDt = 1 / PHYS_HZ;
+        while (acc >= stepDt) {
+          const decide = frame % 2 === 0;
+          let doFlap = false;
+          if (mode === "you") {
+            doFlap = pendingFlap;
+            pendingFlap = false;
+          } else if (decide) {
+            doFlap = policyFlap();
+            lastDecideFlap = doFlap;
+          }
+          step(doFlap);
+          acc -= stepDt;
+        }
+        if (brain && (mode === "brain" || mode === "feat")) {
+          drawBrainMap(mapCanvas, mode === "feat" ? featBrain : brain, hoverIdx);
+        }
+      } else if (!alive && document.getElementById("loop").checked && mode !== "you") {
+        if (!restartAt) restartAt = ts + 900;
+        if (ts >= restartAt) {
+          const s = Number(document.getElementById("seed").value) || 42;
+          document.getElementById("seed").value = String(s + 1);
+          reset(s + 1);
+        }
+      }
+      const who =
+        mode === "brain" ? "eye" : mode === "feat" ? "feat" : mode === "rule" ? "rule" : "you";
+      const active = mode === "feat" ? featBrain : brain;
+      hud.textContent = `${who} · score ${score} · t=${(frame / PHYS_HZ).toFixed(1)}s · seed ${document.getElementById("seed").value}` +
+        (active ? ` · ${active.n} cells · ${active.nParams} θ` : "");
+      updateLiveHud();
+      draw();
+      requestAnimationFrame(tick);
+    }
+
+    mapCanvas.addEventListener("mousemove", (e) => {
+      const mapBrain = mode === "feat" ? featBrain : brain;
+      if (!mapBrain) return;
+      const rect = mapCanvas.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * mapCanvas.width;
+      const y = ((e.clientY - rect.top) / rect.height) * mapCanvas.height;
+      const cols = 8;
+      const pad = 4;
+      const cell = Math.floor(Math.min((mapCanvas.width - pad * 2) / cols, (mapCanvas.height - pad * 2 - 28) / Math.ceil(mapBrain.n / cols)));
+      const c = Math.floor((x - pad) / cell);
+      const r = Math.floor((y - 22 - pad) / cell);
+      const idx = r * cols + c;
+      if (c < 0 || c >= cols || idx < 0 || idx >= mapBrain.n) {
+        hoverIdx = -1;
+        cellInfo.textContent = "Hover a cell for identity.";
+      } else {
+        hoverIdx = idx;
+        const node = mapBrain.nodes[idx] || {};
+        const act = mapBrain.h[idx].toFixed(3);
+        cellInfo.textContent = `#${idx}  ${node.type || "?"}  role=${node.role || "?"}\nid=${node.id ?? "?"}  nt=${node.nt || "?"}  h=${act}`;
+      }
+      drawBrainMap(mapCanvas, mapBrain, hoverIdx);
+    });
+
+    canvas.addEventListener("pointerdown", flapHuman);
+    window.addEventListener("keydown", e => {
+      if (e.code === "Space" || e.code === "ArrowUp") { e.preventDefault(); flapHuman(); }
+    });
+    document.getElementById("restart").onclick = () => reset(document.getElementById("seed").value);
+    document.getElementById("seed").onchange = () => reset(document.getElementById("seed").value);
+    document.getElementById("modeYou").onclick = () => setMode("you");
+    document.getElementById("modeRule").onclick = () => setMode("rule");
+    document.getElementById("modeBrain").onclick = () => setMode("brain");
+    document.getElementById("modeFeat").onclick = () => setMode("feat");
+
+    async function loadOpticalBrain() {
+      try {
+        const { bundle, encoder } = await OpticalEncoder.load("brain/optical.json");
+        const b = await FlyBrain.load({
+          graphUrl: "brain/subgraph_v1.bin",
+          metaUrl: "brain/subgraph_v1.json",
+          paramsUrl: `brain/${bundle.readout_bin}`,
+        });
+        if (bundle.visual_to_cell) b.visualToCell = bundle.visual_to_cell;
+        return { brain: b, encoder };
+      } catch (e) {
+        console.warn("optical load failed", e);
+        return null;
+      }
+    }
+
+    Promise.all([
+      load("land", `${ASSET}/land.png`),
+      load("sky", `${ASSET}/sky.png`),
+      load("pipeUp", `${ASSET}/pipe-up.png`),
+      load("pipeDown", `${ASSET}/pipe-down.png`),
+      load("pipeBody", `${ASSET}/pipe.png`),
+      ...FLY_SRCS.map(loadFly),
+      FlyBrain.load({
+        graphUrl: "brain/subgraph_v1.bin",
+        metaUrl: "brain/subgraph_v1.json",
+        paramsUrl: "brain/champion_params.bin",
+      }).catch((err) => {
+        console.warn(err);
+        return null;
+      }),
+      loadOpticalBrain(),
+    ]).then((loaded) => {
+      flyFrames.push(...loaded.slice(5, 9));
+      featBrain = loaded[9];
+      const opt = loaded[10];
+      if (opt) {
+        brain = opt.brain;
+        opticalEnc = opt.encoder;
+      } else {
+        brain = featBrain;
+      }
+      if (!brain && !featBrain) {
+        hud.textContent = "Circuit assets missing — Rule mode still works.";
+        mode = "rule";
+        setMode("rule");
+      } else if (!opticalEnc) {
+        mode = featBrain ? "feat" : "rule";
+        setMode(mode);
+        hud.textContent =
+          "Optical weights missing — using feature brain. Run: .venv/bin/python scripts/train_optical.py";
+      } else {
+        reset(42);
+      }
+      const mapBrain = mode === "feat" ? featBrain : brain;
+      if (mapBrain) drawBrainMap(mapCanvas, mapBrain, hoverIdx);
+      requestAnimationFrame(tick);
+    }).catch((err) => {
+      console.error(err);
+      hud.textContent = "Failed to load assets";
+      reset(42);
+      requestAnimationFrame(tick);
+    });
+  </script>
+</body>
+</html>

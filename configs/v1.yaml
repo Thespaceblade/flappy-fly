@@ -1,0 +1,31 @@
+# flappy-fly-malecns-topology-v1
+env_id: flappy-fly-malecns-topology-v1
+
+physics_hz: 60
+decide_hz: 30
+episode_cap_seconds: 60
+
+cem:
+  generations: 40
+  population: 32
+  elites: 4
+  courses_per_gen: 3
+  init_sigma: 0.8
+  sigma_floor: 0.07
+  mean_mix: 0.3  # keep 0.3 old + 0.7 elite stats
+
+seeds:
+  train_course_min: 1
+  train_course_max: 900000
+  validation: [1100001, 1100002, 1100003, 1100004]
+  test_min: 2100001
+  test_count: 100
+  replicas: [20260914, 20260915, 20260916]
+
+arms:
+  - real
+  - shuffle
+  - silence
+  - untrained
+  - idle
+  - rule

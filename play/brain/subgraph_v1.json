@@ -1,0 +1,1614 @@
+{
+  "version": "flappy-fly-subgraph-v1",
+  "n": 220,
+  "n_edges": 8021,
+  "n_dn": 32,
+  "feature_to_cell": [
+    90,
+    125,
+    203,
+    96,
+    150,
+    135
+  ],
+  "dn_index": [
+    211,
+    0,
+    21,
+    216,
+    28,
+    37,
+    4,
+    23,
+    3,
+    2,
+    15,
+    27,
+    10,
+    11,
+    18,
+    205,
+    12,
+    199,
+    19,
+    36,
+    6,
+    20,
+    55,
+    22,
+    158,
+    47,
+    31,
+    29,
+    50,
+    157,
+    35,
+    40
+  ],
+  "channels": [
+    "LC4",
+    "LC11",
+    "LC9",
+    "LC15",
+    "LC16",
+    "LC17"
+  ],
+  "nodes": [
+    {
+      "id": 10010,
+      "type": "DNp01",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10017,
+      "type": "AMMC-A1",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 10030,
+      "type": "pIP1",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10038,
+      "type": "pIP1",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10063,
+      "type": "DNp27",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10074,
+      "type": "PVLP010",
+      "nt": "glutamate",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 10106,
+      "type": "DNp11",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10145,
+      "type": "PVLP130",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 10147,
+      "type": "LHAD1g1",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 10173,
+      "type": "PVLP151",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 10197,
+      "type": "DNp02",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10228,
+      "type": "DNp06",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10234,
+      "type": "DNp35",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10241,
+      "type": "AVLP001",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 10257,
+      "type": "AMMC-A1",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 10259,
+      "type": "DNp11",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10325,
+      "type": "AVLP572",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 10353,
+      "type": "AVLP538",
+      "nt": "unclear",
+      "sign": 0,
+      "role": "interneuron"
+    },
+    {
+      "id": 10361,
+      "type": "DNg40",
+      "nt": "glutamate",
+      "sign": -1,
+      "role": "output"
+    },
+    {
+      "id": 10417,
+      "type": "DNp103",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10449,
+      "type": "DNpe025",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10558,
+      "type": "DNp35",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10580,
+      "type": "DNp70",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10590,
+      "type": "DNpe052",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10609,
+      "type": "PVLP120",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 10719,
+      "type": "AVLP079",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 10728,
+      "type": "WED116",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 10752,
+      "type": "DNp03",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10783,
+      "type": "DNp09",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10813,
+      "type": "DNp43",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10936,
+      "type": "LT61b",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 10971,
+      "type": "DNa11",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 10986,
+      "type": "PVLP140",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 10992,
+      "type": "PVLP122",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 10995,
+      "type": "PVLP120",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 11133,
+      "type": "DNp70",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 11159,
+      "type": "DNp71",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 11177,
+      "type": "DNp09",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 11187,
+      "type": "LoVP54",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 11219,
+      "type": "LT82a",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 11233,
+      "type": "DNa11",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 11252,
+      "type": "PVLP017",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 11291,
+      "type": "LT82a",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 11338,
+      "type": "PVLP140",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 11435,
+      "type": "LoVP54",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 11460,
+      "type": "AVLP086",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 11472,
+      "type": "PVLP015",
+      "nt": "glutamate",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 11573,
+      "type": "DNpe021",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 11599,
+      "type": "AVLP429",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 11677,
+      "type": "PVLP151",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 11687,
+      "type": "DNpe031",
+      "nt": "glutamate",
+      "sign": -1,
+      "role": "output"
+    },
+    {
+      "id": 11826,
+      "type": "PVLP151",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 11883,
+      "type": "PVLP017",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 11895,
+      "type": "PVLP022",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 11927,
+      "type": "PVLP122",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 12218,
+      "type": "DNpe031",
+      "nt": "glutamate",
+      "sign": -1,
+      "role": "output"
+    },
+    {
+      "id": 12236,
+      "type": "LC31b",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 12275,
+      "type": "PVLP151",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 12349,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 12519,
+      "type": "AVLP023",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 12824,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 12957,
+      "type": "LT61b",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 13109,
+      "type": "PVLP020",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 13271,
+      "type": "PVLP018",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 13648,
+      "type": "PVLP150",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 13824,
+      "type": "LAL053",
+      "nt": "glutamate",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 14091,
+      "type": "CB3544",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 14168,
+      "type": "CB1932",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 14789,
+      "type": "PVLP070",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 14888,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 15018,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 15052,
+      "type": "PVLP100",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 15160,
+      "type": "PVLP070",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 15266,
+      "type": "PVLP070",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 15283,
+      "type": "PVLP070",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 15329,
+      "type": "pC1_2a",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 15439,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 15597,
+      "type": null,
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 15994,
+      "type": "CB3513",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 16459,
+      "type": "PVLP024",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 16475,
+      "type": "PVLP024",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 16659,
+      "type": "PVLP011",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 16904,
+      "type": "AVLP259",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 16917,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 17270,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 17375,
+      "type": "SAD064",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 17459,
+      "type": "CB2682",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 17478,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 17556,
+      "type": null,
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 17564,
+      "type": "pC1_2a",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 17653,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 17920,
+      "type": "PVLP072",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 18086,
+      "type": "PVLP094",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 18149,
+      "type": "PVLP096",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 18340,
+      "type": "WED125",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 18739,
+      "type": "CB1852",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 18870,
+      "type": "LC15",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 18907,
+      "type": "PVLP123",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 18925,
+      "type": "AVLP541",
+      "nt": "glutamate",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 19187,
+      "type": "WED125",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 19454,
+      "type": "PVLP024",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 19463,
+      "type": "CB1688",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 19473,
+      "type": "CB2049",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 19558,
+      "type": "PVLP214m",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 19660,
+      "type": "PVLP096",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 19748,
+      "type": "PVLP028",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 19910,
+      "type": "PVLP074",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 20176,
+      "type": "LC11",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 20440,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 20560,
+      "type": "AVLP552",
+      "nt": "glutamate",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 20618,
+      "type": "LC11",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 21186,
+      "type": "LC11",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 21342,
+      "type": "CL323",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 21392,
+      "type": "CB3400",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 21568,
+      "type": "AVLP080",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 21570,
+      "type": "LC11",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 21721,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 21910,
+      "type": "CB3863",
+      "nt": "glutamate",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 22181,
+      "type": "LC11",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 22893,
+      "type": "LC11",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 23112,
+      "type": "PVLP074",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 23446,
+      "type": "CB3201",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 23526,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 23616,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 23634,
+      "type": "AVLP320_a",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 23781,
+      "type": "LC11",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 23923,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 24647,
+      "type": "LC11",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 25075,
+      "type": "CB1255",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 25438,
+      "type": "SAD064",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 25484,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 25525,
+      "type": "LC15",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 25772,
+      "type": "LC17",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 25873,
+      "type": "LC17",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 26207,
+      "type": "LC17",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 26617,
+      "type": "LC17",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 26899,
+      "type": "LC11",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 26996,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 27152,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 27624,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 27750,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 27829,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 28051,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 28655,
+      "type": "LC16",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 29017,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 29049,
+      "type": "LC17",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 29171,
+      "type": "LC17",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 29417,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 29469,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 30351,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 30663,
+      "type": "LC16",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 30856,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 31169,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 31429,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 31498,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 32381,
+      "type": "AVLP176_c",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 32597,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 33037,
+      "type": "DNp69",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 33335,
+      "type": "DNpe024",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 33480,
+      "type": "LC15",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 34482,
+      "type": "AVLP176_c",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 34662,
+      "type": "LC15",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 34814,
+      "type": "LC15",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 35262,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 35455,
+      "type": "LC15",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 36519,
+      "type": "AVLP176_c",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 36986,
+      "type": "LC17",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 37587,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 37638,
+      "type": "LC16",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 37870,
+      "type": "LC15",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 38019,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 40131,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 40751,
+      "type": "LC15",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 43249,
+      "type": "LC17",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 43253,
+      "type": "LC16",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 43599,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 44897,
+      "type": "LC16",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 47016,
+      "type": "LC16",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 47141,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 57503,
+      "type": "LC16",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 63084,
+      "type": "LC16",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 65991,
+      "type": "PVLP021",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 71157,
+      "type": "CB3513",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 77614,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 81112,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 511914,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 512155,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 512366,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 512701,
+      "type": "AVLP176_c",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 515900,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 517426,
+      "type": "PVLP026",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 517752,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 518439,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 518544,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 519046,
+      "type": "PVLP005",
+      "nt": "glutamate",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 519297,
+      "type": "pC1_2a",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 519389,
+      "type": "AVLP452",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 520449,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 521326,
+      "type": "AVLP259",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 521377,
+      "type": "DNpe024",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 522472,
+      "type": "LT82a",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 523564,
+      "type": "PVLP011",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 523624,
+      "type": "PVLP018",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 523984,
+      "type": "LC9",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "input"
+    },
+    {
+      "id": 523985,
+      "type": "LAL053",
+      "nt": "glutamate",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 524001,
+      "type": "DNp05",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 524747,
+      "type": "pC1_2a",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 526031,
+      "type": "PVLP021",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 526836,
+      "type": "PVLP028",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 527690,
+      "type": "PVLP022",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 530029,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 531898,
+      "type": "DNp04",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 531899,
+      "type": "AVLP452",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 532839,
+      "type": "CL140",
+      "nt": "gaba",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 534040,
+      "type": "PVLP015",
+      "nt": "glutamate",
+      "sign": -1,
+      "role": "interneuron"
+    },
+    {
+      "id": 535341,
+      "type": "LC4",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 536048,
+      "type": "DNp27",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "output"
+    },
+    {
+      "id": 537899,
+      "type": "LoVC18",
+      "nt": "dopamine",
+      "sign": 0,
+      "role": "interneuron"
+    },
+    {
+      "id": 556303,
+      "type": "CB1498",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    },
+    {
+      "id": 562991,
+      "type": "LoVP85",
+      "nt": "acetylcholine",
+      "sign": 1,
+      "role": "interneuron"
+    }
+  ],
+  "selection": {
+    "visual_per_type": 8,
+    "n_dn": 32,
+    "n_bridges": 140
+  },
+  "visual_to_cell": [
+    90,
+    125,
+    203,
+    96,
+    150,
+    135
+  ],
+  "optical_inject": "feature_to_cell",
+  "optical_best_pipes": 0.125,
+  "optical_agree": 0.8147448015122873
+}

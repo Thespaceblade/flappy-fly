@@ -1,0 +1,74 @@
+{
+  "version": "flappy-fly-optical-v2",
+  "obs": [
+    4,
+    64,
+    64
+  ],
+  "stack": 4,
+  "n_visual": 6,
+  "visual_to_cell": [
+    90,
+    125,
+    203,
+    96,
+    150,
+    135
+  ],
+  "n_dn": 32,
+  "hidden": 16,
+  "encoder_shapes": {
+    "encoder.conv1.weight": [
+      32,
+      4,
+      5,
+      5
+    ],
+    "encoder.conv1.bias": [
+      32
+    ],
+    "encoder.conv2.weight": [
+      64,
+      32,
+      5,
+      5
+    ],
+    "encoder.conv2.bias": [
+      64
+    ],
+    "encoder.conv3.weight": [
+      64,
+      64,
+      5,
+      5
+    ],
+    "encoder.conv3.bias": [
+      64
+    ],
+    "encoder.fc.weight": [
+      128,
+      4096
+    ],
+    "encoder.fc.bias": [
+      128
+    ],
+    "encoder.out.weight": [
+      6,
+      128
+    ],
+    "encoder.out.bias": [
+      6
+    ]
+  },
+  "encoder_bin": "optical_encoder.bin",
+  "readout_bin": "optical_readout.bin",
+  "channels": [
+    "LC4",
+    "LC11",
+    "LC9",
+    "LC15",
+    "LC16",
+    "LC17"
+  ],
+  "note": "4-frame 64\u00b2 stack \u2192 inject cells; frozen MaleCNS + DN readout"
+}

@@ -1,33 +1,37 @@
 # Flappy Fly
 
-Can the Google/HHMI **MaleCNS v1.0** fruit-fly connectome learn to play Flappy Bird?
+**Research question:** Does a fixed MaleCNS-derived circuit help a trained flap readout play Flappy Bird better than a topology-shuffled control?
 
-This project explores wiring a simulated adult male *Drosophila* CNS (~166k neurons) into a Flappy Bird environment: sensory frames in → connectome dynamics → flap / no-flap out → optional learning.
+See [RESEARCH.md](RESEARCH.md). Game **mechanics** come from the original Android Flappy Bird via [reFlappy](https://github.com/THEN00P/reFlappy); **sprites** from [floppybird](https://github.com/nebez/floppybird). Attribution: [THIRD_PARTY.md](THIRD_PARTY.md).
 
-## What this is
+## Play (original look + original numbers)
 
-An experimental research playground, not a claim that a reconstructed fly "understands" the game. The connectome is a wiring diagram; dynamics, sensory encoding, and action decoding are engineering choices we define.
+```sh
+python3 -m http.server 8765 --bind 127.0.0.1
+# open http://127.0.0.1:8765/play/
+```
 
-## Upstream resources
+**Brain (eye)** uses a learned CNN on a 4×64×64 game-view stack → MaleCNS inject cells → DN readout.  
+**Brain (feat)** is the older engineered-feature champion.
 
-| Resource | Role |
-| --- | --- |
-| [MaleCNS connectome](https://male-cns.janelia.org/) | Official dataset (Google Research + HHMI Janelia + collaborators) |
-| [nftechie/doomfly](https://github.com/nftechie/doomfly) | Best-documented open reference: full MaleCNS loop on Doom |
-| [@_lyraaaa_ Beat Saber thread](https://x.com/_lyraaaa_/status/2097527368919470162) | Viral motor-distillation + RL demo (no public repo found) |
-| [TuragaLab/flybody](https://github.com/TuragaLab/flybody) | Biomechanical fly body / RL tasks in MuJoCo (different goal) |
+```sh
+.venv/bin/python scripts/train_optical.py
+```
 
-## Approach sketch
+## Headless C env (same physics)
 
-Inspired by DOOMFLY and the Beat Saber experiment:
+```sh
+make -C c test
+./c/flappy_fly rollout --seed 42 --policy rule
+python3 scripts/train_cem.py
+```
 
-1. **Encode** each Flappy Bird frame into a proxy sensory drive (e.g. brightness / motion onto optic-lobe or other chosen input neurons).
-2. **Simulate** spike / rate dynamics on the retained MaleCNS graph.
-3. **Decode** activity from a small set of readout neurons into a binary flap action.
-4. **Train** in stages: optional teacher-forced / replay distillation for motor patterning, then reinforcement learning with less external forcing.
+## Layout
 
-Details and code land here as the experiment is built.
-
-## Status
-
-Repo scaffold only. Simulation loop, Flappy Bird env, and training pipeline are next.
+```
+c/                   # reFlappy-faithful simulator + brain stub
+play/                # browser UI (floppybird sprites + reFlappy physics)
+vendor/floppybird/   # upstream assets
+RESEARCH.md          # Real vs Shuffle protocol
+THIRD_PARTY.md       # attribution
+```

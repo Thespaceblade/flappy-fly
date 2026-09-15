@@ -12,11 +12,20 @@ build/
 
 # Connectome / large data
 connectome_data/
+data/raw/
 *.npz
 *.h5
 *.npz.gz
 *.parquet
 *.feather
+# Allow small exported subgraph under data/processed/
+!data/processed/
+!data/processed/**
+
+# Training run dumps (keep play/brain exports instead)
+results/*
+!results/.gitkeep
+!configs/.gitkeep
 
 # Game / training artifacts
 outputs/
@@ -36,6 +45,10 @@ logs/
 .idea/
 .vscode/
 *.swp
+
+# C build
+c/*.o
+c/flappy_fly
 
 # Node (if a viewer is added later)
 node_modules/
